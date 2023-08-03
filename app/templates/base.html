@@ -14,16 +14,24 @@
 		<header>
 			<ul>
 				<li class="display-2">Blog</li>
-				
+				{% if auth_user %}
 				<li>
-					{% if auth_user %}
+					<form action="{% url 'logout' %}" method="POST">
+						{% csrf_token %}
+						<input type="hidden" name="url_name" value="{{ url_name }}">
+						<input type="submit" value='Выйти'>
+					</form>
+				</li>
+				<li>
 					<a class="display-6" href="{% url 'user_posts' user_id=auth_user.pk %}">{{ auth_user }}</a>
-					{% else %}
+				</li>
+				{% else %}
+				<li>
 					<a href="{% url 'register' %}">Регистрация</a>
 					|
 					<a href="{% url 'login' %}">Вход</a>
-					{% endif %}
 				</li>
+				{% endif %}
 			</ul>
 		</header>
 		{% block content %}{% endblock %}

@@ -69,6 +69,13 @@ def login(request):
 
 	return render(request, 'registration/login.html', context)
 
+def logout(request):
+	if request.method == 'POST':
+		url_name = request.POST['url_name']
+		request.session['user_id'] = ''
+		return redirect(url_name)
+
+
 def add_user(name, email, password):
 	new_user = User(name=name, email=email, password=password)
 	new_user.save()

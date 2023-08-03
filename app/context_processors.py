@@ -8,8 +8,13 @@ def get_auth_user(request):
     else:
         return None
 
+def get_url_name(request):
+    url_name = request.resolver_match.url_name
+    return url_name if url_name else None
+
 def user_context(request):
     context = {
-        'auth_user': get_auth_user(request)
+        'auth_user': get_auth_user(request),
+        'url_name': get_url_name(request)
     }
     return context
