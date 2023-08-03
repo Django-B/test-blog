@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/user_posts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="user">
+		<span class="display-4 ">Посты пользователя test_user</span>
+	</div>
+	
+	<ul class="posts">
+		<li class="post">
+			<div class="title">
+				<span>My post 1</span>
+			</div>
+			<div class="body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum sint tenetur quasi impedit commodi nemo incidunt. Ea consequuntur dicta a, aliquam nobis harum nulla, quo, unde facilis rem, illum perspiciatis.</div>
+		</li>
+		<li class="post">
+			<div class="title">
+				<span>My post 2</span>
+			</div>
+			<div class="body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum sint tenetur quasi impedit commodi nemo incidunt. Ea consequuntur dicta a, aliquam nobis harum nulla, quo, unde facilis rem, illum perspiciatis.</div>
+		</li>
+		<li class="post">
+			<div class="title">
+				<span>My post 3</span>
+			</div>
+			<div class="body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum sint tenetur quasi impedit commodi nemo incidunt. Ea consequuntur dicta a, aliquam nobis harum nulla, quo, unde facilis rem, illum perspiciatis.</div>
+		</li>
+	</ul>
+</div>
+{% endblock %}

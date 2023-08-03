@@ -1,0 +1,13 @@
+.window {
+	margin-top: 20px;
+}
+.window>.title {
+	text-align: center;
+}
+.window>form {
+	margin-top: 10px;
+	text-align: center;
+}
+.window>form>input {
+	margin-top: 10px;
+}

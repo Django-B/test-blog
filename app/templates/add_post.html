@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/add_post.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="window">
+		<div class="title">
+			<span class="display-4">Добавить пост</span>
+		</div>
+		<form method="POST">
+			<input type="text" placeholder="Заголовок" required><br>
+			<textarea placeholder="Текст" required></textarea><br>
+			<input type="submit" value="Добавить">
+		</form>
+	</div>
+</div>
+{% endblock %}
