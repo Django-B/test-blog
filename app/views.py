@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
 
 from .models import User, Post
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, AddPostForm
 
 
 def users(request):
@@ -22,9 +21,29 @@ def user_posts(request, user_id):
 	return render(request, 'user_posts.html', context)
 
 def add_post(request):
+	if not request.session.get('user_id'):
+		return redirect('login')
+	form = AddPostForm()
 	if request.method == 'POST':
-		pass 
-	return render(request, 'add_post.html')
+		form = AddPostForm(request.POST)
+		if form.is_valid():
+			user_id = request.session.get('user_id')
+			user = User.objects.get(pk=user_id)
+			title = form.cleaned_data['title']
+			body = form.cleaned_data['body']
+
+			post = Post(user=user, title=title, body=body)
+			post.save()
+			
+			return redirect('user_posts', user_id)
+		
+	context = {
+		'form': form
+	}
+	return render(request, 'add_post.html', context)
+
+def delete_post(request):
+	pass
 
 
 def register(request):
@@ -36,8 +55,7 @@ def register(request):
 			email = form.cleaned_data['email']
 			password = form.cleaned_data['password']
 
-			new_user = authenticate(request, name=name, email=email, password=password)
-			# new_user = add_user(name, email, password)
+			new_user = add_user(name, email, password)
 
 			return redirect('login')
 
@@ -80,3 +98,5 @@ def add_user(name, email, password):
 	new_user = User(name=name, email=email, password=password)
 	new_user.save()
 	return new_user
+
+	

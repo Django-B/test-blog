@@ -54,3 +54,15 @@ class LoginForm(forms.Form):
 		'placeholder': 'Пароль',
 		'required': '',
 	}))
+
+class AddPostForm(forms.Form):
+	title = forms.CharField(widget=forms.TextInput(attrs={
+		'name': 'title',
+		'placeholder': 'Заголовок',
+		'required': '',
+	}))
+	body = forms.CharField(widget=forms.Textarea(attrs={
+		'name': 'body',
+		'placeholder': 'Текст',
+		'required': '',
+	}))

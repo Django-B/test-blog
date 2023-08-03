@@ -16,11 +16,18 @@
 		<li class="post">
 			<div class="title">
 				<span>{{ post.title }}</span>
-				<!-- <span>Delete</span> -->
+				<!-- <form action="delete_post"></form> -->
 			</div>
 			<div class="body">{{ post.body }}</div>
 		</li>
 		{% endfor %}
+		{% if auth_user and auth_user.pk == post_user.pk %}
+		<li class="add-post">
+			<form action="{% url 'add_post' %}" method="GET">
+				<input type="submit" value="Добавить Пост">
+			</form>
+		</li>
+		{% endif %}
 	</ul>
 </div>
 {% endblock %}

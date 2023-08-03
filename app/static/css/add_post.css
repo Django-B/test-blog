@@ -8,10 +8,10 @@
 	margin-top: 10px;
 	text-align: center;
 }
-.window>form>input, .window>form>textarea {
+.window>form>p>input, .window>form>p>textarea {
 	margin-top: 10px;
 	width: 40%;
 }
-.window>form>textarea {
+.window>form>p>textarea {
 	height: 100px
 }
