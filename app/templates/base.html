@@ -14,10 +14,15 @@
 		<header>
 			<ul>
 				<li class="display-2">Blog</li>
+				
 				<li>
+					{% if auth_user %}
+					<a class="display-6" href="{% url 'user_posts' user_id=auth_user.pk %}">{{ auth_user }}</a>
+					{% else %}
 					<a href="{% url 'register' %}">Регистрация</a>
 					|
 					<a href="{% url 'login' %}">Вход</a>
+					{% endif %}
 				</li>
 			</ul>
 		</header>

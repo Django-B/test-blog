@@ -12,10 +12,19 @@
 			<span class="display-4">Регистрация</span>
 		</div>
 		<form method="POST">
-			<input type="text" placeholder="Имя" required><br>
-			<input type="text" placeholder="E-mail" required><br>
-			<input type="text" placeholder="Пароль" required><br>
-			<input type="text" placeholder="Подтвердить пароль" required><br>
+			{% csrf_token %}
+			{% for field in form %}
+        <p>
+            {{ field }}
+        </p>
+        {% if field.errors %}
+            <ul>
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    	{% endfor %}
 			<input type="submit" value="Зарегистрироваться">
 		</form>
 	</div>

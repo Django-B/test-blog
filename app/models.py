@@ -1,11 +1,16 @@
 from django.db import models
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.hashers import make_password, check_password
 
 
 class User(models.Model):
 	name = models.CharField(max_length=100, unique=True)
 	email = models.EmailField()
 	password = models.CharField(max_length=100)
+
+	def check_pass(self, password):
+		 return check_password(password, self.password)
+
 
 	def save(self, *args, **kwargs):
 	    # Хэшируем пароль перед сохранением объекта

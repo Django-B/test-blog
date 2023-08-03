@@ -12,6 +12,10 @@
 	padding: 10px;
 	border: 2px black solid;
 }
+.post>.title {
+	display: flex;
+	justify-content: space-between;
+}
 .post>.title>span {
 	border-bottom: 2px black solid;
 }
