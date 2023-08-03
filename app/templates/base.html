@@ -18,7 +18,7 @@
 				<li>
 					<form action="{% url 'logout' %}" method="POST">
 						{% csrf_token %}
-						<input type="hidden" name="url_name" value="{{ url_name }}">
+						<!-- <input type="hidden" name="url_name" value="{{ url_name }}"> -->
 						<input type="submit" value='Выйти'>
 					</form>
 				</li>

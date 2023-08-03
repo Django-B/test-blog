@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from .models import User, Post
 from .forms import RegisterForm, LoginForm, AddPostForm
 
+from .my_decorators import check_login
+
 
 def users(request):
 	users = User.objects.all()
@@ -20,9 +22,8 @@ def user_posts(request, user_id):
 	}
 	return render(request, 'user_posts.html', context)
 
+@check_login
 def add_post(request):
-	if not request.session.get('user_id'):
-		return redirect('login')
 	form = AddPostForm()
 	if request.method == 'POST':
 		form = AddPostForm(request.POST)
@@ -42,8 +43,16 @@ def add_post(request):
 	}
 	return render(request, 'add_post.html', context)
 
+@check_login
 def delete_post(request):
-	pass
+	if request.method == 'POST':
+		user_id = request.session.get('user_id')
+		user = User.objects.get(pk=user_id)
+		post_id = request.POST['post_id']
+		post = Post.objects.get(pk=post_id)
+		post.delete()
+		
+	return redirect('user_posts', user_id)
 
 
 def register(request):
@@ -87,11 +96,12 @@ def login(request):
 
 	return render(request, 'registration/login.html', context)
 
+@check_login
 def logout(request):
+	print(request.path)
 	if request.method == 'POST':
-		url_name = request.POST['url_name']
 		request.session['user_id'] = ''
-		return redirect(url_name)
+		return redirect('users')
 
 
 def add_user(name, email, password):

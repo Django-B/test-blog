@@ -16,7 +16,13 @@
 		<li class="post">
 			<div class="title">
 				<span>{{ post.title }}</span>
-				<!-- <form action="delete_post"></form> -->
+				{% if auth_user and auth_user.pk == post_user.pk %}
+				<form action="{% url 'delete_post' %}" method="POST">
+					{% csrf_token %}
+					<input type="hidden" name="post_id" value="{{ post.pk }}">
+					<input type="submit" value="Удалить">
+				</form>
+				{% endif %}
 			</div>
 			<div class="body">{{ post.body }}</div>
 		</li>
