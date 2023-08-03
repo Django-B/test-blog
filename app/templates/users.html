@@ -4,9 +4,11 @@
 <div class="container">
 	<span class="display-4">Пользователи</span>
 	<ul>
-		<li><a href="">John</a></li>
-		<li><a href="">Mike</a></li>
-		<li><a href="">Bob</a></li>
+		{% for user in users %}
+		<li>
+			<a href="{% url 'user_posts' user_id=user.pk %}">{{ user.name }}</a>
+		</li>
+		{% endfor %}
 	</ul>
 </div>
 {% endblock %}
