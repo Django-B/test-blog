@@ -109,4 +109,3 @@ def add_user(name, email, password):
 	new_user.save()
 	return new_user
 
-	
