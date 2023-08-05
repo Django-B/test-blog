@@ -1,6 +1,11 @@
 from django.urls import path
 from . import views
-from .api_views import UserRetrieveUpdateDestroyView, UserListCreateView
+from .api_views import UserRetrieveUpdateDestroyView,\
+        UserListCreateView,\
+        UserPostsAPIView,\
+        PostListCreateView,\
+        PostRetrieveUpdateDestroyView
+
 
 urlpatterns = [
 	path('users/', views.users, name='users'),
@@ -16,4 +21,8 @@ urlpatterns = [
     # DRF API
     path('api/users/', UserListCreateView.as_view(), name='user-list'),
     path('api/users/<int:pk>/', UserRetrieveUpdateDestroyView.as_view(), name='user-detail'),
+    path('api/users/<int:user_id>/posts/', UserPostsAPIView.as_view(), name='user-posts-api'),
+
+    path('api/posts/', PostListCreateView.as_view(), name='post-list'),
+    path('api/posts/<int:pk>/', PostRetrieveUpdateDestroyView.as_view(), name='post-detail'),
 ]

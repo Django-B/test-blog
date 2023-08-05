@@ -7,15 +7,15 @@ from .my_decorators import check_login
 
 
 def users(request):
-	users = User.objects.all()
-	context = {
+    users = User.objects.all() # type: ignore
+    context = {
 		'users': users,
 	}
-	return render(request, 'users.html', context)
+    return render(request, 'users.html', context)
 
 def user_posts(request, user_id):
-	user = User.objects.get(pk=user_id)
-	user_posts = Post.objects.filter(user=user_id)
+	user = User.objects.get(pk=user_id) # type: ignore
+	user_posts = Post.objects.filter(user=user_id) # type: ignore
 	context = {
 		'post_user': user,
 		'user_posts': user_posts,
@@ -29,7 +29,7 @@ def add_post(request):
 		form = AddPostForm(request.POST)
 		if form.is_valid():
 			user_id = request.session.get('user_id')
-			user = User.objects.get(pk=user_id)
+			user = User.objects.get(pk=user_id) # type: ignore
 			title = form.cleaned_data['title']
 			body = form.cleaned_data['body']
 
@@ -47,9 +47,9 @@ def add_post(request):
 def delete_post(request):
 	if request.method == 'POST':
 		user_id = request.session.get('user_id')
-		user = User.objects.get(pk=user_id)
+		user = User.objects.get(pk=user_id) # type: ignore
 		post_id = request.POST['post_id']
-		post = Post.objects.get(pk=post_id)
+		post = Post.objects.get(pk=post_id) # type: ignore
 		post.delete()
 		
 	return redirect('user_posts', user_id)
@@ -83,7 +83,7 @@ def login(request):
 			password = form.cleaned_data['password']
 
 			# Проверка данных на корректность
-			user = User.objects.filter(name=name)
+			user = User.objects.filter(name=name) # type: ignore
 			if not user.exists() or not user.first().check_pass(password):
 				form.add_error('password', 'Неправильное имя или пароль')
 
