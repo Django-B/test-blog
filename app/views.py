@@ -84,7 +84,7 @@ def login(request):
 
 			# Проверка данных на корректность
 			user = User.objects.filter(name=name) # type: ignore
-			if not user.exists() or not user.first().check_pass(password):
+			if not user.exists() or user.first().check_pass(password):
 				form.add_error('password', 'Неправильное имя или пароль')
 
 			request.session['user_id'] = user.first().pk
